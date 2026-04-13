@@ -16,8 +16,7 @@
 ```
 帮我安装一个医疗费发票汇总工具。
 请执行：npx skills add hejiheji001/MedicalFapiaoOCR -g -y
-然后安装它的 Python 依赖：pip install -r requirements.txt
-（requirements.txt 在 skill 安装目录里，通常是 ~/.agents/skills/medical-fapiao-ocr/）
+然后根据仓库里的 DEPLOY.md 完成所有环境配置。
 ```
 
 **之后每次使用**，只需要告诉 AI 你的 PDF 在哪：
@@ -35,15 +34,6 @@ AI 会自动完成所有工作，几分钟后告诉你结果，并在 PDF 同目
 提取这个 PDF 里所有发票的金额和页码
 医疗费报销汇总，文件在 D:\报销材料\就医记录.pdf
 ```
-
-### 常见问题
-
-| 问题 | 告诉 AI |
-|------|---------|
-| AI 说找不到 npx | "帮我安装 Node.js" |
-| AI 说找不到 python | "帮我安装 Python" |
-| OCR 速度很慢 | 正常现象，50 页扫描件大约需要 5 分钟 |
-| 金额识别有误 | "用 --dpi 400 重新跑一次" |
 
 ---
 
