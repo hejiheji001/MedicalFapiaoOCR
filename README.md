@@ -4,48 +4,46 @@
 
 ---
 
-## 零基础一键使用（通过 AI 助手）
+## 零基础使用（全程对话，无需碰命令行）
 
-> 不需要懂编程。只需要有 [OpenCode](https://github.com/opencode-ai/opencode) 或其他支持 Skills 的 AI 编程助手。
+> 你不需要懂编程，不需要打开终端，不需要输入任何命令。
+> 只需要一个 AI 编程助手（如 [OpenCode](https://github.com/opencode-ai/opencode)、Claude Code、Cursor 等），全程用自然语言对话即可。
 
-### 第一步：安装 Skill
+### 你只需要做一件事：把下面这段话复制给 AI
 
-在终端（命令行）中粘贴以下命令并回车：
-
-```bash
-npx skills add hejiheji001/MedicalFapiaoOCR -g -y
-```
-
-看到 `Done!` 就说明安装成功了。这是一次性操作，以后不需要再装。
-
-### 第二步：安装 Python 依赖
-
-如果你的电脑还没装过 Python 相关工具，请让 AI 帮你执行：
+**首次使用**（只需说一次，AI 会帮你全部装好）：
 
 ```
-帮我安装 MedicalFapiaoOCR 的 Python 依赖
+帮我安装一个医疗费发票汇总工具。
+请执行：npx skills add hejiheji001/MedicalFapiaoOCR -g -y
+然后安装它的 Python 依赖：pip install -r requirements.txt
+（requirements.txt 在 skill 安装目录里，通常是 ~/.agents/skills/medical-fapiao-ocr/）
 ```
 
-AI 会自动找到 `requirements.txt` 并运行 `pip install`。
-
-### 第三步：把 PDF 交给 AI
-
-打开 AI 助手，直接说：
+**之后每次使用**，只需要告诉 AI 你的 PDF 在哪：
 
 ```
-帮我汇总这个PDF里的医疗费发票：C:\Users\你的用户名\Desktop\就医记录.pdf
+帮我汇总这个 PDF 里的医疗费发票：C:\Users\你的用户名\Desktop\就医记录.pdf
 ```
 
-把路径换成你自己的 PDF 文件位置就行。AI 会自动调用本工具，几分钟后在同目录下生成 `医疗费汇总.xlsx`。
+AI 会自动完成所有工作，几分钟后告诉你结果，并在 PDF 同目录下生成 `医疗费汇总.xlsx`。
+
+### 你还可以这样说
+
+```
+把桌面上的就医记录做成 Excel 汇总表
+提取这个 PDF 里所有发票的金额和页码
+医疗费报销汇总，文件在 D:\报销材料\就医记录.pdf
+```
 
 ### 常见问题
 
-| 问题 | 解决方法 |
-|------|----------|
-| 提示找不到 `npx` | 先安装 [Node.js](https://nodejs.org/)（选 LTS 版本，一路下一步） |
-| 提示找不到 `python` | 先安装 [Python](https://www.python.org/downloads/)（安装时勾选 "Add to PATH"） |
-| OCR 速度很慢 | 正常，扫描页需要逐页识别，50 页大约 5 分钟 |
-| 输出的金额不对 | 可能是扫描件质量太低，可以尝试用 `--dpi 400` 提高精度 |
+| 问题 | 告诉 AI |
+|------|---------|
+| AI 说找不到 npx | "帮我安装 Node.js" |
+| AI 说找不到 python | "帮我安装 Python" |
+| OCR 速度很慢 | 正常现象，50 页扫描件大约需要 5 分钟 |
+| 金额识别有误 | "用 --dpi 400 重新跑一次" |
 
 ---
 
