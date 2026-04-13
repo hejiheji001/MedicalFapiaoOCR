@@ -110,3 +110,36 @@ openpyxl>=3.1.0
 - OCR对低质量扫描件可能识别不准确（建议300 DPI以上）
 - `MAX_WORKERS` 设置过高可能导致内存耗尽（14核曾导致崩溃，4核稳定）
 - 仅支持中文医疗收费票据格式（贵州省/浙江省门诊/住院票据）
+
+## Agent 调用指南
+
+当用户要求汇总医疗费发票时，按以下步骤执行：
+
+1. **确认 Python 依赖已安装**：在 skill 所在目录运行 `pip install -r requirements.txt`
+2. **执行脚本**：`python run.py <用户提供的PDF路径>`（脚本位于本 skill 目录）
+3. **汇报结果**：告知用户发票数量、总金额、Excel 文件位置
+4. **异常处理**：如果 OCR 超时，降低 workers 数重试（`-w 2`）
+
+### 用户可能的表述方式
+
+- "帮我汇总这个PDF里的医疗费发票"
+- "把就医记录做成Excel汇总表"
+- "提取发票金额和页码"
+- "医疗费报销汇总"
+
+### 执行示例
+
+```bash
+# 找到 skill 目录下的 run.py
+# Windows 通常在: ~\.agents\skills\medical-fapiao-ocr\run.py
+# macOS/Linux 通常在: ~/.agents/skills/medical-fapiao-ocr/run.py
+
+python <skill_dir>/run.py "C:\Users\xxx\就医记录.pdf" -o "C:\Users\xxx\output" --save-raw
+```
+
+### 结果校验
+
+输出 Excel 应包含：
+- 标题行：`医疗费汇总：XXX.XX 元`
+- 3 列对布局（金额 | 页码 × 3 组）
+- 每行一张发票，页码可能是单页、连续范围或多段组合
